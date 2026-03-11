@@ -6,9 +6,24 @@ from datetime import datetime
 
 
 def application(candidates):
-    data = [candidate.model_dump() for candidate in candidates]
-    insertedRecords = CandidateRepository.application(data)
-    return {"message": f"Total of record saved: {len(insertedRecords.inserted_ids)}" }
+    #data = [candidate.model_dump() for candidate in candidates]
+    dataEvaluated = []
+    for candidate in candidates:
+        candidateExists = CandidateRepository.verifyCandidateExists(candidate.name,candidate.rfc,candidate.curp)
+        if candidateExists:
+            dataEvaluated.append({
+                "name": candidate.name,
+                "message": "This candidate is already registered"
+            })
+        else:
+            CandidateRepository.application(candidate.model_dump())
+            dataEvaluated.append({
+                "name": candidate.name,
+                "message": "Candidate registered correctly"
+            })
+    return dataEvaluated
+    # insertedRecords = CandidateRepository.application(data)
+    # return {"message": f"Total of record saved: {len(insertedRecords.inserted_ids)}" }
 
 async def uploadCandidateDocument(id,document):
     candidateDocument = {}

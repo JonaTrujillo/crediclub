@@ -7,7 +7,7 @@ class Candidate(BaseModel):
     name: str
     age: int = Field(...,ge=1,le=101)
     gender: str
-    rfq: str
+    rfc: str
     curp: str
     address: str
     income: float = Field(...,ge=0)

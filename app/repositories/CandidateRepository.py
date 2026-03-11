@@ -8,8 +8,11 @@ candidateDocumentCollection = db.candidateDocument
 def getCandidateById(id):
     return candidateCollection.find_one({"_id":ObjectId(id)})
 
-def application(candidates):
-    return candidateCollection.insert_many(candidates)
+def verifyCandidateExists(name,rfc,curp):
+    return candidateCollection.find_one({"name":name, "rfc":rfc, "curp":curp})
+
+def application(candidate):
+    return candidateCollection.insert_one(candidate)
 
 def uploadCandidateDocument(document):
     data = CandidateDocument (
