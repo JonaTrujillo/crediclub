@@ -77,7 +77,8 @@ def validateCreditStatus(id):
     ]
     approved = all(r["approved"] for r in results)
     reasons = [r["reason"] for r in results if r["reason"]]
-
+    
+    CandidateRepository.updateCandidateStatus(approved,id)
     return {
         "name": candidate['name'],
         "credit_tatus": "Approved" if approved else "Rejected",

@@ -13,7 +13,9 @@ El candidato solicita un crédito mayor a 40,000, debe comprobar ingresos entre 
 solo comprobar ingreso minimo de 20,000
 El candidato solicita un crédito menor igual a 40,000, debe comprobar ingresos entre  15,000 y 25,000 si es hombre, caso contrario
 solo comprobar ingreso minimo de 10,000
-
+-----------
+Existe una carpeta llamada diagram en la raiz
+----------
 Instalación
 -----------
 1. Clonar el repositorio:
@@ -39,15 +41,23 @@ Uso
 
 Notas
 -----
-- Requiere Python >= 3.10
+- Requiere Python >= 3.14.3
 - MongoDB debe estar corriendo localmente
+- Las reglas usadas para determinar aprobación de crédito son las siguientes:
+  -Crédito a solicitar sea mayor o igual que 20,000 y menor o igual que 80,000
+  -Se debe tener un score entre 500 y 900 puntos
+  -Se debe tener una edad entre 20 y 60 años
+  -Se debe tener 5 o mas años de experiencia
+  -Para solicitudes mayores a 40,000 se debe tener un ingreso entre 25,000 y 40,000 si eres hombre, si eres mujer el ingreso
+  mínimo es de 20,000
+  -Para solicitudes menores a 40,000 se debe tener un ingreso entre 15,000 y  25,000 si eres hombre, si eres mujer el ingreso mínimo es de 10,000
 - Para introducir data de candidatos, se adjunta ejemplo:
 [
   {
     "name": "Jonathan Trujillo Capetillo",
     "age": 29,
     "gender": "Masculino",
-    "rfq": "TUCJ961223ADA",
+    "rfc": "TUCJ961223ADA",
     "curp": "TUCJ961223HVZRPN02",
     "address": "Circuito valencia 248, La Querencia Veracruz, 91697",
     "income": 24000,
@@ -58,7 +68,7 @@ Notas
     "name": "Melissa Perez Cabrera",
     "age": 31,
     "gender": "Femenino",
-    "rfq": "PECM961212Q2W",
+    "rfc": "PECM961212Q2W",
     "curp": "PECM961212MVZRPN04",
     "address": "Circuito valencia 248, La Querencia Veracruz, 91697",
     "income": 23000,
@@ -69,7 +79,7 @@ Notas
     "name": "Dolores Capetillo Perez",
     "age": 60,
     "gender": "Femenino",
-    "rfq": "DOCP651903QQW",
+    "rfc": "DOCP651903QQW",
     "curp": "DOCP601903QQWMVZRPN07",
     "address": "Avenida Jamapa Poniente, Jamapa Veracruz, 94260",
     "income": 30000,
@@ -80,7 +90,7 @@ Notas
     "name": "Ventura Trujillo Quintana",
     "age": 65,
     "gender": "Femenino",
-    "rfq": "VETQ651903VCE",
+    "rfc": "VETQ651903VCE",
     "curp": "VETQ651903HMVZRPN07",
     "address": "Estados Unidos",
     "income": 45000,

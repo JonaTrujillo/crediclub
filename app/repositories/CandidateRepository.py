@@ -26,3 +26,9 @@ def uploadCandidateDocument(document):
 def getCandidateScoreById(id):
     return candidateCollection.find_one({"_id":ObjectId(id)},{"score": 1,"name":1})
 
+def updateCandidateStatus(approved,id):
+    return candidateCollection.update_one(
+        {"_id": ObjectId(id)},
+        {"$set": {"status": 2 if approved else 3}}
+    )
+
