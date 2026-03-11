@@ -66,6 +66,6 @@ def validateCreditStatus(id):
     return {
         "name": candidate['name'],
         "credit_tatus": "Approved" if approved else "Rejected",
-        "reasons": reasons
+        "reasons": "The credit has been accepted" if approved else reasons
     }
     

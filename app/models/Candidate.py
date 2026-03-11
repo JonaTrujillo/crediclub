@@ -9,9 +9,10 @@ class Candidate(BaseModel):
     gender: str
     rfq: str
     curp: str
+    address: str
     income: float = Field(...,ge=0)
     amountRequested: float = Field(...,ge=1)
     yearExperience: int
-    status: Optional[int] = None
+    status: int = Field(default=1)
     score: int = Field(default_factory=lambda:random.randint(300,900))
     dateCreated: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))

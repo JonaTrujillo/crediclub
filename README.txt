@@ -49,6 +49,7 @@ Notas
     "gender": "Masculino",
     "rfq": "TUCJ961223ADA",
     "curp": "TUCJ961223HVZRPN02",
+    "address": "Circuito valencia 248, La Querencia Veracruz, 91697",
     "income": 24000,
     "amountRequested": 50000,
     "yearExperience": 3
@@ -59,6 +60,7 @@ Notas
     "gender": "Femenino",
     "rfq": "PECM961212Q2W",
     "curp": "PECM961212MVZRPN04",
+    "address": "Circuito valencia 248, La Querencia Veracruz, 91697",
     "income": 23000,
     "amountRequested": 55000,
     "yearExperience": 8
@@ -69,6 +71,7 @@ Notas
     "gender": "Femenino",
     "rfq": "DOCP651903QQW",
     "curp": "DOCP601903QQWMVZRPN07",
+    "address": "Avenida Jamapa Poniente, Jamapa Veracruz, 94260",
     "income": 30000,
     "amountRequested": 60000,
     "yearExperience": 15
@@ -79,6 +82,7 @@ Notas
     "gender": "Femenino",
     "rfq": "VETQ651903VCE",
     "curp": "VETQ651903HMVZRPN07",
+    "address": "Estados Unidos",
     "income": 45000,
     "amountRequested": 80000,
     "yearExperience": 8
