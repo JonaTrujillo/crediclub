@@ -59,4 +59,17 @@ def incomeGenderRule(income,amount,gender):
                         "reason": None if income >= MIN_INCOME_FEMALE_UP_REQUESTED
                         else f"The income must be greather than {MIN_INCOME_FEMALE_UP_REQUESTED}"
                 }
+    else:
+        match gender:
+            case "Masculino":
+                return {"approved": income >= MIN_INCOME_MALE_DOWN_REQUESTED,
+                        "reason": None if income >= MIN_INCOME_MALE_DOWN_REQUESTED
+                        else f"The income must be greather than {MIN_INCOME_MALE_DOWN_REQUESTED}"
+                }
+            case "Femenino":
+                return {"approved": income >= MIN_INCOME_FEMALE_DOWN_REQUESTED,
+                        "reason": None if income >= MIN_INCOME_FEMALE_DOWN_REQUESTED
+                        else f"The income must be greather than {MIN_INCOME_FEMALE_DOWN_REQUESTED}"
+                }
+        
 
