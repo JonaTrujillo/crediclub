@@ -14,8 +14,8 @@ def createUser(candidates:List[Candidate]):
 
 #Upload File
 @router.post("/applications/{id}/documents")
-def uploadCandidateDocument(id:str,document:UploadFile = File(...)):
-    return CandidateService.uploadCandidateDocument(id,document)
+async def uploadCandidateDocument(id:str,document:UploadFile = File(...)):
+    return await CandidateService.uploadCandidateDocument(id,document)
 
 #Get candidate score
 @router.get("/get/creditscore/{id}")

@@ -12,7 +12,6 @@ def application(candidates):
     return candidateCollection.insert_many(candidates)
 
 def uploadCandidateDocument(document):
-    print(document)
     data = CandidateDocument (
         userId=document["userId"],
         name=document["name"],

@@ -10,7 +10,7 @@ def application(candidates):
     insertedRecords = CandidateRepository.application(data)
     return {"message": f"Total of record saved: {len(insertedRecords.inserted_ids)}" }
 
-def uploadCandidateDocument(id,document):
+async def uploadCandidateDocument(id,document):
     candidateDocument = {}
     if parseToMb(document.size) > MAX_FILE_SIZE:
         raise HTTPException(status_code=400,detail="The document must be less than 5MB")
@@ -37,7 +37,7 @@ def uploadCandidateDocument(id,document):
     except Exception as e:
         raise HTTPException(status_code=500,detail="Something wrong with the file")
     finally:
-        document.close()
+        await document.close()
     return {"filename": document.filename, "content_type": document.content_type, "patidh": str(filePath), "id": str(insertedRecord.inserted_id)}
 
 def getCreditScore(id):
