@@ -41,6 +41,12 @@ Uso
 
 Notas
 -----
+sk -9CmKnDMwX7Cvyl4jmOVpWN
+-r1XL2CaK5JAqBfbPQnCT3BlbkF
+J1kXezwjv9GkrLpF0htbv6pxHWrCOr3uBagBpgkF6gA !! Añadir esta llave en el archivo
+LlmService en la linea 3 y completar
+client = OpenAI(api _ key = "" )
+-----
 - Requiere Python >= 3.14.3
 - MongoDB debe estar corriendo localmente
 - Las reglas usadas para determinar aprobación de crédito son las siguientes:

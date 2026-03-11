@@ -40,6 +40,11 @@ Uso
 
 
 Notas
+sk -9CmKnDMwX7Cvyl4jmOVpWN
+-r1XL2CaK5JAqBfbPQnCT3BlbkF
+J1kXezwjv9GkrLpF0htbv6pxHWrCOr3uBagBpgkF6gA 
+client = OpenAI(api _ key = "" ) !! Añadir esta llave en el archivo
+LlmService en la linea 3 y completar la linea
 -----
 - Requiere Python >= 3.14.3
 - MongoDB debe estar corriendo localmente
