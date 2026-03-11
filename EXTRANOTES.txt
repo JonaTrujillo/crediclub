@@ -1,0 +1,18 @@
+Elementos no conseguidos a tiempo
+- Trazabilidad de decisiones -> Intenciones, general tablas de logs para cada intento de aprobacion de credito por candidato
+- Uso de modelo LLM para validacion de domicilio - Se realizó una implementación pero no se tuvo tiempo para 
+mejorar el proceso de obtencion de texto del documento, el modelo interpreta pero el texto no es suficiente para validar
+- El proceso de reconocimiento de texto se intentó implementar para PDF, no se hizo una implementacion para archivos de imagen
+-El flujo pensado con el reconocimiento de archivos era determinar desde la carga si la direccion era igual, de no ser así automaticamente
+se cambiaba el estatus a rechazado y se iba a denegar el credito al candidato, si la direccion coincidia, no modificaba estatus
+y este se determinaba por las reglas las cuales se aplican al consultar el estatus
+- Escalabilidad de productos - Inicialmente no se planteó de esa manera, se intentaba moldear conforme fueran llegando ideas 
+pero la orientación se hizo para tratar de resolver el planteamiento inicial
+- Elementos adicionales pensados pero no implementados por tiempo - Hacer uso de transacciones cuando intervienen mas de 1 tabla
+rollback de archivos en caso de algun fallo
+Consultas basicas que podrian hacerce con la estructura actual:
+Conteo de registros por status de aprobacion
+Porcentaje de registros con un status en espeficico respecto al total
+Consultar documentos de un candidato en especifico
+Consultar propiedades de candidato en especifico
+Consultar cnadidatos cuyo score se encuentre en un rango o valor en especifico

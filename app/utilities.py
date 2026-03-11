@@ -1,11 +1,10 @@
 from pathlib import Path
+import pdfplumber
 
 UPLOAD_DIR = Path("app/resources/files")
 MAX_FILE_SIZE = 5
 VALID_DOCUMENT_TYPES = [
-    "application/pdf",
-    "image/jpeg",
-    "image/png"
+    "application/pdf"
 ]
 MIN_AMOUNT = 20000
 MAX_AMOUNT = 80000
@@ -21,6 +20,14 @@ MIN_INCOME_FEMALE_DOWN_REQUESTED = 10000
 YEARS_EXPERIENCE = 5
 def parseToMb(size):
     return size / (1024 * 1024)
+
+def extractTextFromPdf(filePath):
+    with pdfplumber.open(filePath) as pdf:
+        page = pdf.pages[0]
+        crop_box = (0, 0, 300, 150)  
+        cropped = page.within_bbox(crop_box)
+        text = cropped.extract_text()
+        return text.strip() if text else ""
 
 def amountValue(amount):
     return {"approved": amount >= MIN_AMOUNT and amount <= MAX_AMOUNT,

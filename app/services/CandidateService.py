@@ -1,12 +1,12 @@
 from app.repositories import CandidateRepository
 from app.utilities import *
+from app.services.LlmService import cehckAddress
 from fastapi import HTTPException
 import shutil
 from datetime import datetime
 
 
 def application(candidates):
-    #data = [candidate.model_dump() for candidate in candidates]
     dataEvaluated = []
     for candidate in candidates:
         candidateExists = CandidateRepository.verifyCandidateExists(candidate.name,candidate.rfc,candidate.curp)
@@ -22,8 +22,6 @@ def application(candidates):
                 "message": "Candidate registered correctly"
             })
     return dataEvaluated
-    # insertedRecords = CandidateRepository.application(data)
-    # return {"message": f"Total of record saved: {len(insertedRecords.inserted_ids)}" }
 
 async def uploadCandidateDocument(id,document):
     candidateDocument = {}
@@ -40,20 +38,23 @@ async def uploadCandidateDocument(id,document):
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     fileName = f"{timestamp}_{document.filename}"
     filePath = UPLOAD_DIR / fileName
+    fileType = "pdf" if document.content_type == "application/pdf" else "image"
     try:
         candidateDocument["userId"] = id
         candidateDocument["name"] = fileName
         candidateDocument["size"] = document.size
         candidateDocument['path'] = str(filePath)
         insertedRecord =  CandidateRepository.uploadCandidateDocument(candidateDocument)
-
         with open(filePath, "wb") as buffer:
             shutil.copyfileobj(document.file,buffer)
+        result = verifyCandidateDocument(candidateExists, str(filePath), fileType)
     except Exception as e:
-        raise HTTPException(status_code=500,detail="Something wrong with the file")
+        print(e)
+        raise HTTPException(status_code=500,detail=f"Something wrong with the file:{e}")
     finally:
         await document.close()
-    return {"filename": document.filename, "content_type": document.content_type, "patidh": str(filePath), "id": str(insertedRecord.inserted_id)}
+    return {"filename": document.filename, "content_type": document.content_type, "patidh": str(filePath), "id": str(insertedRecord.inserted_id),
+            "comments": result}
 
 def getCreditScore(id):
     candidateScore =  CandidateRepository.getCandidateScoreById(id)
@@ -67,7 +68,12 @@ def validateCreditStatus(id):
 
     if not candidate:
         raise HTTPException(status_code=400,detail="User not found") 
-    
+    if candidate["status"] is None:
+        return {
+            "name": candidate['name'],
+            "credit_tatus": "Rejected",
+            "reasons": "The address from the document does not match"
+        }
     results = [
         amountValue(candidate['amountRequested']),
         scoreRule(candidate['score']),
@@ -77,11 +83,23 @@ def validateCreditStatus(id):
     ]
     approved = all(r["approved"] for r in results)
     reasons = [r["reason"] for r in results if r["reason"]]
-    
+
     CandidateRepository.updateCandidateStatus(approved,id)
     return {
         "name": candidate['name'],
         "credit_tatus": "Approved" if approved else "Rejected",
         "reasons": "The credit has been accepted" if approved else reasons
     }
+
+def verifyCandidateDocument(candidate, filePath, fileType):
+    if fileType == "pdf":
+        text = extractTextFromPdf(filePath)
+        modelResult = cehckAddress(candidate["address"],text)
+        #if "NO MATCH" in modelResult:
+            # CandidateRepository.updateCandidateStatus(None,candidate["_id"])
+        return modelResult
+    else: 
+        return ""
+
+
     

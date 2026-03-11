@@ -26,6 +26,8 @@ def getCreditScore(id:str):
 @router.get("/applications/{id}")
 def validateCreditStatus(id:str):
     return CandidateService.validateCreditStatus(id)
+
+
     
 
 

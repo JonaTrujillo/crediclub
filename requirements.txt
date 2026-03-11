@@ -3,3 +3,5 @@ uvicorn==0.41.0
 pydantic==2.12.5
 pymongo==4.16.0
 python-multipart==0.0.22
+pdfplumber==0.11.9
+pytesseract==0.3.13
